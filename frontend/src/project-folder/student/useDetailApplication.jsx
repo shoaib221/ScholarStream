@@ -59,8 +59,12 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
 
                 <br/>
 
-                <div className="text-lg text-(--color1) text-center font-bold" >Application ID # {application._id}</div>
+                <div className="text-xl text-(--color1) text-center font-bold" >Application Detail</div>
                 <br/>
+
+                <div className="font-bold text-(--color1)" >
+                    Application ID # {application._id}
+                </div>
 
                 <div className="font-bold text-(--color1)"     >
 
@@ -140,7 +144,12 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
 
                 <div>
                     <span className="font-bold" > Service Charge: </span>
-                    {application.scholarshipDetails.applicationFees} USD
+                    {application.scholarshipDetails.serviceCharge} USD
+                </div>
+
+                <div>
+                    <span className="font-bold" > Payable Amount : </span>
+                    {application.scholarshipDetails.applicationFees + application.scholarshipDetails.serviceCharge } USD
                 </div>
 
                 <br />

@@ -3,7 +3,7 @@ import { auth } from './firebase.config';
 import { use, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context";
 import { toast } from "react-toastify";
-import { PrivateRoute } from "./auth";
+import { PrivateRoute } from ".//RestrictedRoutes.jsx";
 import { DownWindowContext } from '../Nav/context';
 import { FaRegSmile } from "react-icons/fa";
 import axios from "axios";

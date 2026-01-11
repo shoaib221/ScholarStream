@@ -1,7 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { useUpdateScholarship } from "./scholarshipHook.jsx";
-import { AdminRoute } from "../../auth/auth.jsx";
+import { AdminRoute } from "../../auth/RestrictedRoutes.jsx";
 import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -75,8 +75,8 @@ export const ManageScholarships = () => {
                     {scholarships ? scholarships.map((scholarship) => (
                         <div key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center' >
                             <div>
-                                <div className='font-semibold text-lg' >{scholarship.scholarshipName}</div>
-                                <div className='text-sm text-gray-600' >{scholarship.universityName}</div>
+                                <div className='font-semibold text-lg text-(--color4)' >{scholarship.scholarshipName}</div>
+                                <div className='text-sm text-(--color2)' >{scholarship.universityName}</div>
                             </div>
                             <div className="flex gap-2" >
                                 <button className='button-1234' onClick={() => showUpdate(scholarship, true, SearchScholarships)} >Manage</button>

@@ -1,7 +1,7 @@
 import React, { use, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../auth/context';
-import { PrivateRoute } from '../auth/auth';
+import { PrivateRoute } from '../auth/RestrictedRoutes.jsx';
 import { toast } from 'react-toastify';
 import { TimeDate } from '../miscel/TimeDate';
 import { Loading } from '../miscel/Loading';
@@ -11,7 +11,7 @@ import { Loading } from '../miscel/Loading';
 export const ScholarshipDetail = () => {
     const { id } = useParams();
     const [scholarship, setScholarship] = useState(null);
-    const { axiosInstance, user } = useAuthContext();
+    const { axiosInstance, user, loading } = useAuthContext();
     const [education, setEducation] = useState("");
     const [extras, setExtras] = useState("");
     const [message, setMessage] = useState("");
@@ -71,14 +71,14 @@ export const ScholarshipDetail = () => {
         }
     }
 
-    if (!scholarship) return <Loading />
+    
 
 
     return (
         <PrivateRoute>
-            <div className="mx-auto flex-1 w-full  gap-4 flex flex-col lg:flex-row" >
+            { scholarship ?  <div className="mx-auto flex-1 w-full  gap-4 flex flex-col lg:flex-row" >
 
-                <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky top-0 px-2" >
+                <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky lg:top-0 px-2" >
                     <div className='h-72 lg:h-90 w-full rounded-lg bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} ></div>
                     <br/>
                     <div className='text-xl text-(--color4) font-bold' > {scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>
@@ -119,7 +119,7 @@ export const ScholarshipDetail = () => {
 
                     <br />
 
-                    {user.role === 'student' && <>
+                    {user?.role === 'student' && <>
                         <div className="text-xl text-[var(--color4)] font-bold"  >Apply Now</div>
                         <br />
                         <div className='font-bold' >Education</div>
@@ -172,7 +172,8 @@ export const ScholarshipDetail = () => {
                 </div>
 
 
-            </div>
+            </div>:
+            <Loading /> }
         </PrivateRoute>
     );
 };

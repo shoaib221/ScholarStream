@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
+
 const baseURL = "http://localhost:4000";
 // const baseURL = "https://express-practice-chi.vercel.app/";
 
@@ -70,23 +71,22 @@ export const AuthProvider = ({ children }) => {
         );
     };
 
+    async function SignedOut() {
+        
+        
+        
+    }
+
     
     const handleUserLogin = async (firebaseUser) => {
-        console.log("handle user login")
-        if (!firebaseUser) {
-            // Not logged in
-            setUser(null);
-            setLoading(false);
-            return;
-        }
-
-        // Setup interceptors first
-        setupInterceptors(firebaseUser);
-
-        console.log(firebaseUser);
-
+        
         try {
-            // Fetch or create user from backend
+
+            if( !firebaseUser ) {
+                return;
+            }
+            
+            setupInterceptors(firebaseUser);
             const res = await axiosInstance.post("/auth/fb-register", firebaseUser);
 
             const fullUser = {
@@ -101,16 +101,15 @@ export const AuthProvider = ({ children }) => {
             console.error(err);
             //toast.error("Failed to fetch user role");
             setUser(firebaseUser); // fallback
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     // 🔥 Auth state listener
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-            setLoading(true);
-            handleUserLogin(firebaseUser);
+        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+            await handleUserLogin( firebaseUser );
+            setLoading(false)
+            
         });
 
         return () => {

@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ManageApplications } from './ManageApplications';
 import { AllReviews } from './AllReviews';
 import { UpdateProfile } from "../../auth/UpdateProfile"
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 
 export const ModeratorDash = () => {
-    const [ cur, setCur ] = useState('profile')
+    const [ searchParams, setSearchParams ] = useSearchParams();
+    const curBoard = searchParams.get( "board" );
+    const navigate = useNavigate()
+    const [ cur, setCur ] = useState( curBoard? curBoard : 'profile')
+    
+    useEffect(() => {
+        let board = searchParams.get( "board" );
+        setCur(board);
+    }, [searchParams])
 
     return (
         <div className='flex flex-col lg:flex-row gap-4 flex-1' >
             
             <div className='flex flex-row  lg:flex-col lg:w-60 lg:min-w-60 gap-2 p-2' >
-                <div className={`${ cur === 'profile'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('profile') }   >My Profile</div>
-                <div className={`${ cur === 'manage-apps'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('manage-apps') } > Manage Applications </div>
-                <div className={`${ cur === 'reviews'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('reviews') } > All Reviews </div>
+                <div className={`${ cur === 'profile'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => navigate('/dashboard?board=profile') }   >My Profile</div>
+                <div className={`${ cur === 'manage-apps'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => navigate('/dashboard?board=manage-apps') } > Manage Applications </div>
+                <div className={`${ cur === 'reviews'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => navigate('/dashboard?board=reviews') } > All Reviews </div>
                 
             </div>
 

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { useQuery } from "@tanstack/react-query";
-import { AdminRoute } from "../../auth/auth";
+import { AdminRoute } from "../../auth/RestrictedRoutes.jsx";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Loading } from "../../miscel/Loading";
@@ -42,15 +42,15 @@ export const RoleChange = ({ user, refetch }) => {
     return (
         <div className="box-1212 gap-4 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
             <div className="cen-ver gap-1" >
-                <div className="font-bold" >{user.name}</div>
-                <div className="text-(--color2a)" > {user.username} </div>
+                <div className="font-bold text-(--color4)" >{user.name}</div>
+                <div className="text-(--color2)" > {user.username} </div>
             </div>
 
             <div className="gap-1 font-bold cen-ver">
-                <select value={role} onChange={(e) => setRole(e.target.value)} >
-                    <option value="admin" >Admin</option>
-                    <option value="moderator" >Moderator</option>
-                    <option value="student" >Student</option>
+                <select value={role} onChange={(e) => setRole(e.target.value)} className="text-(--color4)"  >
+                    <option className="bg-(--color4) text-(--color1a)" value="admin" >Admin</option>
+                    <option className="bg-(--color4) text-(--color1a)" value="moderator" >Moderator</option>
+                    <option className="bg-(--color4) text-(--color1a)" value="student" >Student</option>
                 </select>
             </div>
 
@@ -108,12 +108,14 @@ export const ManageUsers = () => {
 
 
 
-            <select value={filter} onChange={(e) => setFilter(e.target.value)} >
-                <option value="" >Filter Users</option>
-                <option value="admin" >Admin</option>
-                <option value="student" >Student</option>
-                <option value="moderator" >Moderator</option>
+            <select value={filter} onChange={(e) => setFilter(e.target.value)} className="text-(--color4) font-bold" >
+                <option className="bg-(--color4) text-(--color1a)" value="" >Filter Users</option>
+                <option className="bg-(--color4) text-(--color1a)" value="admin" >Admin</option>
+                <option className="bg-(--color4) text-(--color1a)" value="student" >Student</option>
+                <option className="bg-(--color4) text-(--color1a)" value="moderator" >Moderator</option>
             </select>
+
+            <br/>
 
             <br />
             <div className="w-full block" >

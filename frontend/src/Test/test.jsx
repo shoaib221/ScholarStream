@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { PrivateRoute } from '../auth/auth.jsx';
+import { PrivateRoute } from '../auth/RestrictedRoutes.jsx';
 import { AuthContext } from '../auth/context.jsx';
 
 

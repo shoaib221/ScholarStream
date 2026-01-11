@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthContext } from "../../auth/context";
 import { useEffect, useState } from "react";
 import { Loading } from "../../miscel/Loading"
-import { PrivateRoute } from "../../auth/auth";
+import { PrivateRoute } from "../../auth/RestrictedRoutes.jsx";
 
 
 

@@ -65,7 +65,7 @@ export const ThemeProvider = ( { children } ) => {
 
 
 
-    const info =  {  ThemeButton2, toggleTheme, SetTheme, ThemeChoice }
+    const info =  { themeName, ThemeButton2, toggleTheme, SetTheme, ThemeChoice }
 
     return (
         <ThemeContext.Provider value={ info } >

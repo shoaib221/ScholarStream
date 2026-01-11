@@ -57,8 +57,10 @@ const EditTag = ({ isOpen, application, show }) => {
                 </button>
 
                 <br/>
-                <div className="font-bold text-(--color1) text-center" >Application ID # { application._id } </div>
+                <div className="font-bold text-xl text-(--color1) text-center" >Edit Application</div>
                 <br/>
+
+                <div className="font-bold" > Application ID # { application._id } </div> 
 
                 <div className="font-bold" > { application.scholarshipDetails.scholarshipName } </div> 
 

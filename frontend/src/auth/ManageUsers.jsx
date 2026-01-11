@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { AdminRoute, PrivateRoute } from "./auth";
+import { AdminRoute, PrivateRoute } from "./RestrictedRoutes.jsx";
 import { useAuthContext } from "./context";
 import { toast } from "react-toastify";
 import { Key } from "lucide-react";

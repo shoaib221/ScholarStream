@@ -3,17 +3,21 @@ import { AdminDash } from './admin/AdminDash.jsx';
 import { StudentDash } from './student/StudentDash.jsx';
 import { ModeratorDash } from './moderator/ModeratorDash.jsx';
 import { useAuthContext } from '../auth/context';
-import { ForbiddenAccess } from '../auth/RestrictedRoutes';
+import { ForbiddenAccess, PrivateRoute } from '../auth/RestrictedRoutes';
+import { Loading } from '../miscel/Loading.jsx';
 
 
 export const Dashboard = () => {
-    const { user } = useAuthContext()
+    const { user, loading } = useAuthContext();
+    if(loading) return <Loading />;
 
-    if(!user) return <ForbiddenAccess />
-    
-    if( user.role === 'moderator' ) return <ModeratorDash />
-    if( user.role === 'admin' ) return <AdminDash />
-    return <StudentDash />
+    return (
+        <PrivateRoute>
+            { user?.role === 'moderator' &&  <ModeratorDash /> }
+            { user?.role === 'admin' && <AdminDash /> }
+            { user?.role === 'student' && <StudentDash /> }
+        </PrivateRoute>
+    )
     
 };
 

@@ -51,8 +51,11 @@ export const AddScholarship = () => {
     // const watchHobbies = watch("hobbies");
 
     return (
-        <div className="max-w-xl p-6 rounded-lg shadow-md">
-
+        <div className="max-w-xl p-6 rounded-lg shadow-md mx-auto">
+            <div className="text-xl text-(--color4) font-bold text-center" >
+                Add New Scholarship
+            </div>
+            <br/>
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
 
@@ -65,7 +68,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("scholarshipName", { required: "Scholarship name is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Fullbright Scholarship"
                     />
                     {errors.scholarshipName && <p className="text-(--color5) text-sm mt-1">{errors.scholarshipName?.message}</p>}
@@ -77,7 +80,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("universityName", { required: "University name is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Oxford University"
                     />
                     {errors.universityName && <p className="text-(--color5) text-sm mt-1">{errors.universityName.message}</p>}
@@ -90,7 +93,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("country", { required: "Country is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Argentina"
                     />
                     {errors.country && <p className="text-(--color5) text-sm mt-1">{errors.country.message}</p>}
@@ -101,7 +104,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("city", { required: "City is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Buens Aires"
                     />
                     {errors.city && <p className="text-(--color5) text-sm mt-1">{errors.city.message}</p>}
@@ -112,7 +115,7 @@ export const AddScholarship = () => {
                     <input
                         type="number"
                         {...register("worldRank", { required: "World Rank is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. 128"
                     />
                     {errors.worldRank && <p className="text-(--color5) text-sm mt-1">{errors.worldRank.message}</p>}
@@ -123,7 +126,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("subjectCategory", { required: "Subject Category is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Mathematics"
                     />
                     {errors.subjectCategory && <p className="text-(--color5) text-sm mt-1">{errors.subjectCategory.message}</p>}
@@ -134,7 +137,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("scholarshipCategory", { required: "Scholarship category is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Full-funded"
                     />
                     {errors.scholarshipCategory && <p className="text-(--color5) text-sm mt-1">{errors.scholarshipCategory.message}</p>}
@@ -145,7 +148,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("degree", { required: "Degree is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. Bachelor's"
                     />
                     {errors.degree && <p className="text-(--color5) text-sm mt-1">{errors.degree.message}</p>}
@@ -156,7 +159,7 @@ export const AddScholarship = () => {
                     <input
                         type="number"
                         {...register("tuitionFees", { required: "Tuition fees is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. 1000"
                     />
                     {errors.tuitionFees && <p className="text-(--color5) text-sm mt-1">{errors.tuitionFees.message}</p>}
@@ -167,7 +170,7 @@ export const AddScholarship = () => {
                     <input
                         type="number"
                         {...register("applicationFees", { required: "Application fees is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg  px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. 20"
                     />
                     {errors.applicationFees && <p className="text-(--color5) text-sm mt-1">{errors.applicationFees.message}</p>}
@@ -178,7 +181,7 @@ export const AddScholarship = () => {
                     <input
                         type="number"
                         {...register("serviceCharge", { required: "Service charge is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. 20"
                     />
                     {errors.serviceCharge && <p className="text-(--color5) text-sm mt-1">{errors.serviceCharge.message}</p>}
@@ -189,7 +192,7 @@ export const AddScholarship = () => {
                     <input
                         type="text"
                         {...register("deadline", { required: "Deadline is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                         placeholder="i.g. 31/12/2026"
                     />
                     {errors.deadline && <p className="text-(--color5) text-sm mt-1">{errors.deadline.message}</p>}
@@ -200,7 +203,7 @@ export const AddScholarship = () => {
                     <textarea
                         type="text"
                         {...register("description", { required: "Description is required", minLength: { value: 2, message: "Too short" } })}
-                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring resize-none ${errors.name ? "border-red-500" : ""}`}
                         placeholder="Write about it..."
                         rows={5}
                     />

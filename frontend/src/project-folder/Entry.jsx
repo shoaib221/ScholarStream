@@ -8,34 +8,23 @@ import { DownWindowContext } from '../Nav/context.jsx';
 import { AuthContext } from '../auth/context.jsx';
 import { ReactHookFormExample } from '../react-hook-form/react-hook-form.jsx';
 import { SwiperDemo }  from '../Swiper/swiper.jsx';
-
+import { ScrollToTop } from '../react-library/miscel/Scroll.jsx';
 
 
 export const Entry = () => {
     
     const {  DownWindowTag } = useContext(DownWindowContext);
     
-
-    // useEffect(() => {
-    //     axiosInstance.post("/auth/count", { name: "pfh" })
-    //         .then(res => console.dir(res.data))
-    //         .catch(err => console.dir(err))
-    // }, [])
-
-    // function scrollToTop() {
-    //     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // }
-
     return (
         <>
             <Nav />
-            <div className='flex-grow p-4' >
+            <div className='flex-grow p-4 relative flex flex-col' >
                 <DownWindowTag />
                 <Outlet />
             </div>
             <Footer />
 
-            {/* <div onClick={ scrollToTop } className='fixed bottom-4 right-4 z-5' >Back To Top</div> */}
+            <ScrollToTop />
         </>
     );
 };

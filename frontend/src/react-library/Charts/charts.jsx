@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const dummyData = [
@@ -74,3 +75,53 @@ export const Chart = ({data}) => {
 	);
 };
 
+
+
+import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { useThemeContext } from '../Theme/Theme';
+
+export function PieChart1({ data, isAnimationActive = true, datakey }) {
+	const [ color, setColor ] = useState( )
+	const [ divider, setDivider ] = useState( )
+	const { themeName } = useThemeContext()
+
+
+
+	function AdjustTheme () {
+		let color4 =  getComputedStyle(document.documentElement).getPropertyValue('--color4').trim()
+		let color1 = getComputedStyle(document.documentElement).getPropertyValue('--color1').trim()
+
+		setColor( color4 )
+		setDivider( color1 )
+	}
+
+
+	useEffect( () => {
+		AdjustTheme()
+	}, [themeName] )
+
+
+
+	return (
+		<div className="h-120 w-full sm:h-135 max-w-120 mx-auto" >
+			<ResponsiveContainer width="100%" height="100%">
+				<PieChart>
+					<Pie
+						dataKey="count"
+						startAngle={90}
+						endAngle={270}
+						data={data}
+						cx="100%"
+						cy="50%"
+						outerRadius="80%"
+						fill={color}
+						stroke={ divider }     
+        				strokeWidth={1}      
+						label={(entry) => `${entry._id}: ${entry.count}`}
+						isAnimationActive={isAnimationActive}
+					/>
+				</PieChart>
+			</ResponsiveContainer>
+		</div>
+	);
+}
