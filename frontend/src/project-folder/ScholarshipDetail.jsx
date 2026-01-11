@@ -76,9 +76,9 @@ export const ScholarshipDetail = () => {
 
     return (
         <PrivateRoute>
-            { scholarship ?  <div className="mx-auto flex-1 w-full  gap-4 flex flex-col lg:flex-row" >
+            { scholarship ?  <div className="mx-auto flex-grow w-full gap-4 flex flex-col lg:flex-row" >
 
-                <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky lg:top-0 px-2" >
+                <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky lg:top-10 px-2" >
                     <div className='h-72 lg:h-90 w-full rounded-lg bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} ></div>
                     <br/>
                     <div className='text-xl text-(--color4) font-bold' > {scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>

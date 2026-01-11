@@ -1,4 +1,20 @@
 
+:root {
+	--color1: white;
+	--color2: rgb(255, 255, 255);
+	--color2a: white;
+	--color3: #ffffff;
+	--color4: #ffffff;
+	--color5: #ffffff;
+	--color6: #ffffff;
+	--color7: #ffffff;
+	--color-blur: rgba(0, 0, 0, 0.338);
+	--shadow-1: rgba(0, 0, 0, 0.2);
+	--shadow-2: rgba(0, 0, 0, 0.15);
+	--color-c4: #00053d;
+}
+
+
 
 [color-theme="light"] {
 	--color1: white;

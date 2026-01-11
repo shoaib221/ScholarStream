@@ -16,7 +16,7 @@ export const ManageScholarships = () => {
     const [searchPattern, setSearchPattern] = useState("");
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [totalPages, setTotalPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
     const { UpdateTag, showUpdate } = useUpdateScholarship()
 
     useEffect(() => {
@@ -29,6 +29,7 @@ export const ManageScholarships = () => {
 
     async function SearchScholarships() {
         try {
+            console.log("search scholarships")
             let response = await axiosInstance.get(`/scholarship/all?searchBy=${searchBy}&searchPattern=${searchPattern}&page=${page}&limit=${limit}`);
             setScholarships(response.data.scholarships);
             setTotalPages(response.data.totalPages);

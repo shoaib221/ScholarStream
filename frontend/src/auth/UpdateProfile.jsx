@@ -82,7 +82,7 @@ export const UpdateProfile = () => {
     return (
         <PrivateRoute>
             <div className="cen-ver flex-grow relative" >
-                <div className="box-1 max-w-[600px] w-full" >
+                <div className="max-w-[600px] w-full" >
 
                     <div className="cen-hor gap-2" >
                         
@@ -123,7 +123,7 @@ export const UpdateProfile = () => {
 
                     </div>
                     <br />
-                    <button onClick={Update} className="button-1234"  >Update</button>
+                    <div onClick={Update} className="button-1234 mx-auto"  >Update</div>
                 </div>
 
 

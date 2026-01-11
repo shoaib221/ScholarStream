@@ -20,9 +20,9 @@ export const AdminDash = () => {
 
 
     return (
-        <div className='flex flex-col lg:flex-row gap-8 flex-1' >
+        <div className='flex flex-col lg:flex-row gap-4' >
 
-            <div className='flex flex-row lg:flex-col overflow-auto gap-2 p-2' >
+            <div className='sticky top-0 flex lg:flex-col gap-4' >
                 <div className={`${ cur === 'profile'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => navigate('/dashboard?board=profile') } >My Profile</div>
                 <div className={`${ cur === 'add'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => navigate('/dashboard?board=add') } >Add Scholarship</div>
                 <div className={`${ cur === 'scholarships'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => navigate('/dashboard?board=scholarships') } > Manage Scholarships </div>

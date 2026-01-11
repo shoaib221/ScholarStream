@@ -7,28 +7,7 @@ context -> hook -> page -> main
 
 
 #todo
-    assign rider for parcels
-    tracking timeline
-    mongodb aggregation & pipelining
-    chart
-    
-    media
-    socket
-    
-    check the errors of previous assignment
-    
-
-Admin 
-    1. email abcd.1234@email.com, password Abcd-1234
-    2. shoaibtasrif326
-    
-Moderator
-    1. email efgh.1234@email.com password Efgh-1234
-    2. 
-
-Student
-    1. shoaibtasrif221
-
+1. Forms must include validation, error messages, success states, and loaders.
     
 
 

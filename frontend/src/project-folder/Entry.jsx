@@ -17,11 +17,19 @@ export const Entry = () => {
     
     return (
         <>
+            <DownWindowTag />
+
             <Nav />
-            <div className='flex-grow p-4 relative flex flex-col' >
-                <DownWindowTag />
+
+            <br/> <br/> <br/>
+
+            <div className='flex-grow' >
                 <Outlet />
             </div>
+            
+                
+            
+            
             <Footer />
 
             <ScrollToTop />

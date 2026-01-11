@@ -19,8 +19,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
 
     useEffect(() => {
         if (!scholarship) return;
-        reset({ ...scholarship, deadline: new Date(scholarship.deadline).toLocaleDateString() })
-
+        reset({ ...scholarship, deadline: new Date(scholarship.deadline).toLocaleDateString() });
     }, [scholarship])
 
 
