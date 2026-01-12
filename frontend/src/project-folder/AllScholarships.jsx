@@ -42,12 +42,16 @@ export const AllScholarships = () => {
 
     return (
         <div className='block' >
-            <div className='text-2xl font-bold flex-1 text-center text-(--color4)' >Search For Scholarships</div>
+            
             <br />
 
-            <div className='flex gap-2 items-center px-2 justify-between' >
+            <div className='flex justify-center' >
+
+                <span className='flex gap-2 items-center justify-center bg-(--color4) text-(--color1) rounded-lg' >
                 
-                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
+                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)}
+                    
+                 >
                     
                     <option className='bg-(--color4) text-(--color1)' value="" >Search By</option>
                     <option className='bg-(--color4) text-(--color1)' value="scholarshipName" >Scholarhip Name</option>
@@ -55,12 +59,14 @@ export const AllScholarships = () => {
                     <option className='bg-(--color4) text-(--color1)' value="degree" >Degree</option>
                     <option className='bg-(--color4) text-(--color1)' value="scholarshipCategory" >Scholarship Category</option>
                     <option className='bg-(--color4) text-(--color1)' value="subjectCategory" >Subject Category</option>
-                    <option className='bg-(--color4) text-(--color1)' value="location" >Location</option>
+                    <option className='bg-(--color4) text-(--color1)' value="country" >Country</option>
                 </select>
 
-                <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
+                <input className='flex-1 min-w-24 bg-(--color4) text-(--color1)' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
-                <FaSearch title='Submit' onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
+                <FaSearch title='Submit' onClick={SearchScholarships} className='text-2xl bg-(--color4) text-(--color1) cursor-pointer min-w-8' />
+
+                </span>
             </div>
 
             

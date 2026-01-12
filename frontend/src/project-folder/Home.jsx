@@ -11,6 +11,7 @@ import { Timeline } from '../daisyUi/Timeline.jsx';
 import { Chart } from '../Charts/charts.jsx';
 import { FAQs } from "../miscel/FAQs.jsx"
 import { Banner12 } from '../react-library/banner/banner1.jsx';
+import { SearchDivisions } from '../react-library/react-leaflet/leaflet.jsx';
 
 
 
@@ -50,6 +51,10 @@ export const Home = () => {
             <br/>
             <ScrollProduct />
 
+            <br/><br/>
+
+            <div className='text-center text-2xl font-bold' >Search Available <span className='text-[var(--color4)]' >Destinations</span></div>
+            <SearchDivisions />
             
         </div>
     );

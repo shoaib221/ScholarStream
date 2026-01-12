@@ -44,30 +44,30 @@ export const ManageScholarships = () => {
         <AdminRoute>
             <div>
 
-                <UpdateTag refetch={SearchScholarships}  />
+                <UpdateTag refetch={SearchScholarships} />
 
 
 
 
-                <div className='flex gap-2 items-center px-2 justify-between' >
-                    
+                <div className='flex justify-center' >
 
-                    <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} 
+                    <span className='flex gap-2 items-center px-2 justify-center bg-(--color4) text-(--color1) rounded-lg' >
+                        <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)}
                         >
-                        <option className="bg-(--color4) text-(--color1)" value="" >Search By</option>
-                        <option className="bg-(--color4) text-(--color1)" value="scholarshipName" >Scholarhip Name</option>
-                        <option className="bg-(--color4) text-(--color1)" value="universityName" >University Name</option>
-                        <option className="bg-(--color4) text-(--color1)" value="degree" >Degree</option>
-                        <option className="bg-(--color4) text-(--color1)" value="scholarshipCategory" >Scholarship Category</option>
-                        <option className="bg-(--color4) text-(--color1)" value="subjectCategory" >Subject Category</option>
-                        <option className="bg-(--color4) text-(--color1)" value="location" >Location</option>
-                    </select>
+                            <option className="bg-(--color4) text-(--color1)" value="" >Search By</option>
+                            <option className="bg-(--color4) text-(--color1)" value="scholarshipName" >Scholarhip Name</option>
+                            <option className="bg-(--color4) text-(--color1)" value="universityName" >University Name</option>
+                            <option className="bg-(--color4) text-(--color1)" value="degree" >Degree</option>
+                            <option className="bg-(--color4) text-(--color1)" value="scholarshipCategory" >Scholarship Category</option>
+                            <option className="bg-(--color4) text-(--color1)" value="subjectCategory" >Subject Category</option>
+                            <option className="bg-(--color4) text-(--color1)" value="country" >Country</option>
+                        </select>
 
-                
-                    <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
-                    <FaSearch title="Submit" onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
+                        <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
+                        <FaSearch title="Submit" onClick={SearchScholarships} className='text-2xl text-(--color1) cursor-pointer min-w-8' />
+                    </span>
                 </div>
 
 
@@ -84,13 +84,13 @@ export const ManageScholarships = () => {
                             </div>
                         </div>
                     ))
-                    :
-                    <Loading />
-                }
+                        :
+                        <Loading />
+                    }
                 </div>
 
-                <br/>
-                { totalPages > 0 && <div className='flex gap-2 flex-wrap justify-center items-center' >
+                <br />
+                {totalPages > 0 && <div className='flex gap-2 flex-wrap justify-center items-center' >
                     {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
                     {[...Array(totalPages).keys()].map(i => (
                         <div key={i} className={`p-1 min-w-12 cursor-pointer cen-hor ${i + 1 === page && 'button-91'}`} onClick={() => setPage(i + 1)} >
@@ -100,7 +100,7 @@ export const ManageScholarships = () => {
                     {page < totalPages && <div className='button-1234' onClick={() => setPage(x => x + 1)} >Next</div>}
                 </div>}
 
-                <br/>
+                <br />
             </div>
         </AdminRoute>
     )

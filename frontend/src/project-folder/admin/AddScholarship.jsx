@@ -51,7 +51,7 @@ export const AddScholarship = () => {
     // const watchHobbies = watch("hobbies");
 
     return (
-        <div className="max-w-xl p-6 rounded-lg shadow-md mx-auto">
+        <div className="max-w-xl p-6 rounded-lg">
             <div className="text-xl text-(--color4) font-bold text-center" >
                 Add New Scholarship
             </div>
@@ -213,7 +213,7 @@ export const AddScholarship = () => {
 
 
                 {/* Submit button */}
-                <div className="flex items-center justify-center">
+                
                     <Button4
                         type="submit"
                         disabled={isSubmitting}
@@ -223,7 +223,7 @@ export const AddScholarship = () => {
                     </Button4>
 
 
-                </div>
+                
             </form>
 
         </div>

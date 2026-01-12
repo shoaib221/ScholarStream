@@ -5,6 +5,8 @@ import { StarRating } from "../utils/StarRating";
 import { toast } from "react-toastify";
 import { TimeDate } from "../../miscel/TimeDate";
 import { ImCross } from "react-icons/im";
+import { Modal1 } from '../../react-library/Modal/modal.jsx'
+
 
 const ReviewTag = ({ open, app, show }) => {
     const [comment, setComment] = useState("");
@@ -39,54 +41,52 @@ const ReviewTag = ({ open, app, show }) => {
         }
     };
 
-    if (!open || !app) return null;
+    if ( !app) return null;
 
 
 
     return (
-        <div className="fixed inset-0 z-50 block items-center justify-center bg-black/40">
-            <div className="bg-(--color4) text-(--color1a) relative w-full max-w-xl rounded-lg  p-4 shadow-lg mt-8 mx-auto border-2 border-(--color4)">
+        <Modal1 isOpen={open} >
+            <button
+                onClick={() => show(null, false)}
+                className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80"
+            >
+                <ImCross />
+            </button>
+
+            <br />
+            <div className="mb-2 text-lg font-bold text-center text-(--color1)"> Application ID # {app._id} </div>
+
+
+            <div className="font-bold" > {app.scholarshipDetails.scholarshipName} </div>
+
+
+
+            <br />
+
+            <textarea
+                ref={textareaRef}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className="h-40 w-full resize-none rounded border p-2 focus:outline-none focus:ring"
+                placeholder="Write your review..."
+            />
+
+            <span className="font-bold">Rating</span>
+            <StarRating value={rating} onChange={setRating} />
+
+
+            <div className="mt-4 flex justify-center gap-3">
+
+
                 <button
-                    onClick={() => show(null, false)}
-                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80"
+                    onClick={AddReview}
+                    className="button-91"
                 >
-                    <ImCross />
+                    Add Review
                 </button>
-
-                <br/>
-                <div className="mb-2 text-lg font-bold text-center text-(--color1)"> Application ID # { app._id } </div>
-                
-
-                <div className="font-bold" > { app.scholarshipDetails.scholarshipName } </div>
-                
-                
-
-                <br/>
-
-                <textarea
-                    ref={textareaRef}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    className="h-40 w-full resize-none rounded border p-2 focus:outline-none focus:ring"
-                    placeholder="Write your review..."
-                />
-
-                <span className="font-bold">Rating</span>
-                <StarRating value={rating} onChange={setRating} />
-
-
-                <div className="mt-4 flex justify-center gap-3">
-
-
-                    <button
-                        onClick={AddReview}
-                        className="button-91"
-                    >
-                        Add Review
-                    </button>
-                </div>
             </div>
-        </div>
+        </Modal1>
     );
 };
 
@@ -135,109 +135,99 @@ let ReviewDetailTag = ({ review, isOpen, showReviewDetail }) => {
     }
     console.log(review)
 
-    if( !isOpen ) return null;
+    if(!review) return null;
 
     return (
-        <div
-            className={`
-                block overflow-auto
-                top-0 left-0
-                fixed items-center justify-center
-                z-10 w-full h-full 
-                bg-black/40
-            `}
-        >
-            {review && <div className="relative w-full max-w-lg bg-(--color4) text-(--color1a) p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
+        <Modal1 isOpen={isOpen} >
 
-                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80" onClick={() => showReviewDetail(null, false)} >
-                    <ImCross />
-                </button>
-                <br/>
+            <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80" onClick={() => showReviewDetail(null, false)} >
+                <ImCross />
+            </button>
+            <br />
 
-                <div className="text-center font-bold text-(--color1) text-xl" >
-                    Review Detail
-                </div>
-                <br/>
-                
-                <span className="font-bold" >
+            <div className="text-center font-bold text-(--color1) text-xl" >
+                Review Detail
+            </div>
+            <br />
 
-                    {review.scholarshipDetails.scholarshipName} ,
+            <span className="font-bold" >
+
+                {review.scholarshipDetails.scholarshipName} ,
+
+            </span>
+            <span className="text-(--color3)" > {review.scholarshipDetails.scholarshipCategory} </span>
+
+            <br />
+
+            <div>
+                {review.scholarshipDetails.degree} in {review.scholarshipDetails.subjectCategory}
+            </div>
+
+
+
+            <div >
+                {review.scholarshipDetails.universityName}
+
+            </div>
+
+            <div>
+                {review.scholarshipDetails.city}, {review.scholarshipDetails.country}
+            </div>
+
+
+
+            <br />
+            <div>
+                <span className="font-bold" >Applicant</span>
+                <span> {review.reviewerName} </span>
+            </div>
+
+            <div>
+                <span className="font-bold" >Application ID # </span>
+                <span> {review.applicationId} </span>
+            </div>
+
+            <br />
+
+            <div>
+                <div className="font-bold" >Comment: </div>
+                <div>{review.comment}</div>
+            </div>
+
+            <div>
+                <span className="font-bold" >Rating: </span>
+                <span>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <span
+                            key={star}
+                            style={{
+                                cursor: "pointer",
+                                fontSize: "28px",
+                                color: (review.rating) >= star ? "#facc15" : "#d1d5db",
+                                transition: "color 0.2s",
+                            }}
+
+                        >
+                            ★
+                        </span>
+                    ))}
 
                 </span>
-                <span className="text-(--color3)" > {review.scholarshipDetails.scholarshipCategory} </span>
+            </div>
 
-                <br />
-
-                <div>
-                    {review.scholarshipDetails.degree} in {review.scholarshipDetails.subjectCategory}
-                </div>
-
-                
-
-                <div >
-                    {review.scholarshipDetails.universityName}
-
-                </div>
-
-                <div>
-                    {review.scholarshipDetails.city}, {review.scholarshipDetails.country}
-                </div>
-
-
-
-                <br/>
-                <div>
-                    <span className="font-bold" >Applicant</span>
-                    <span> {review.reviewerName} </span>
-                </div>
-
-                <div>
-                    <span className="font-bold" >Application ID # </span>
-                    <span> {review.applicationId} </span>
-                </div>
-
-                <br/>
-
-                <div>
-                    <div className="font-bold" >Comment: </div>
-                    <div>{review.comment}</div>
-                </div>
-
-                <div>
-                    <span className="font-bold" >Rating: </span>
-                    <span>
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <span
-                                key={star}
-                                style={{
-                                    cursor: "pointer",
-                                    fontSize: "28px",
-                                    color: (review.rating) >= star ? "#facc15" : "#d1d5db",
-                                    transition: "color 0.2s",
-                                }}
-
-                            >
-                                ★
-                            </span>
-                        ))}
-
-                    </span>
-                </div>
-
-                <div>
-                    <span className="font-bold" >Reviewed at: </span>
-                    <TimeDate date={review.date} />
-                </div>
+            <div>
+                <span className="font-bold" >Reviewed at: </span>
+                <TimeDate date={review.date} />
+            </div>
 
 
 
 
-                <div className="flex justify-center gap-4 mt-4" >
+            <div className="flex justify-center gap-4 mt-4" >
 
-                    <button className="button-91"  onClick={DeleteReview} >Delete</button>
-                </div>
-            </div>}
-        </div>
+                <button className="button-91" onClick={DeleteReview} >Delete</button>
+            </div>
+        </Modal1>
     )
 
 }

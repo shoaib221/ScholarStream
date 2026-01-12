@@ -171,8 +171,6 @@ const ReviewSchema = mongoose.Schema({
     date: {
         type: Date
     }
-
-
 })
 
 export const Review = mongoose.model("Review", ReviewSchema)

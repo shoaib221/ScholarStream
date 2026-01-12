@@ -3,8 +3,10 @@
     cursor: pointer;
 }
 
-input {
+input, textarea {
     padding: .5rem;
+    max-width: 500px;
+    width: 100%;
 }
 
 #profile-head {

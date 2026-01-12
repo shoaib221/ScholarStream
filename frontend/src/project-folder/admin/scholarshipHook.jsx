@@ -3,6 +3,7 @@ import { useAuthContext } from "../../auth/context";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { ImCross } from "react-icons/im";
+import { Modal1 } from "../../react-library/Modal/modal";
 
 
 let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
@@ -51,18 +52,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
 
 
     return (
-        <div
-            className={`
-                ${isOpen ? "block" : "hidden"}
-                top-0 left-0 overflow-auto p-4
-                fixed 
-                z-10 w-full h-full 
-                bg-black/40
-            `}
-        >
-
-
-            <div className="w-full mx-auto max-w-160 bg-(--color4) text-(--color1a) relative p-8 rounded-lg" >
+        <Modal1 isOpen={isOpen} >
                 <div className="absolute right-4 top-4 cursor-pointer hover:opacity-70" onClick={() => show(null, false)} >
                     <ImCross />
                 </div>
@@ -245,8 +235,8 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         </button>
                     }
                 </div>
-            </div>
-        </div>)
+            </Modal1>
+    )
 
 }
 

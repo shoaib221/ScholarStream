@@ -8,9 +8,9 @@ export const ForbiddenAccess = () => {
 
     return (
         <div className="cen-ver flex-grow my-20">
-            <div className="text-[2rem] font-bold text-(--color4)" >Forbidden Access</div>
+            <div className="text-2xl font-bold text-(--color4)" >Forbidden Access</div>
             <div className="text-[4rem] text-(--color4)" >403</div>
-            <button className="button-1234 text-[1.5rem]" onClick={ () => navigate('/auth') } >
+            <button className="button-1234 text-2xl" onClick={ () => navigate('/auth') } >
                 Please Log In
             </button>
             

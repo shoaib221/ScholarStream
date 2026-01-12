@@ -70,7 +70,7 @@ export const Analytics = () => {
     if(!analytics) return <Loading />
 
     return (
-        <div>
+        <div  className="" >
 
 
             <div className="text-xl font-bold text-(--color4) text-center" >Users  </div>
