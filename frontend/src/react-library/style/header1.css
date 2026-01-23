@@ -1,0 +1,16 @@
+
+
+.header-11 {
+    font-size: 1.2rem;
+    color: var(--color4);
+    font-weight: 600;
+    text-align: center;
+}
+
+.header-12 {
+    font-size: 1.5rem;
+    color: var(--color4);
+    font-weight: 700;
+    text-align: center;
+    margin: .5rem 0rem;
+}

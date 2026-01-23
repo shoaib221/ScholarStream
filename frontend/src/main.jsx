@@ -1,30 +1,28 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import './index.css';
-import "./Buttons/button.css"
-import 'react-toastify/dist/ReactToastify.css';
+
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import { NotFound } from './miscel/NotFound.jsx';
-import { Auth } from './auth/auth.jsx';
-import { AuthProvider } from './auth/context.jsx';
-import './Buttons/button.css';
-import './Box/box.css';
-import { Test } from './Test/test.jsx';
-import { UpdateProfile } from './auth/UpdateProfile.jsx';
-import { Home } from './project-folder/Home.jsx';
-import { Entry } from './project-folder/Entry.jsx';
-import { DownWindowProvider } from './Nav/context.jsx';
-import { ThemeProvider } from './react-library/Theme/Theme.jsx';
+import { NotFound } from '@/react-library/miscel/NotFound.jsx';
+import { Auth } from '@/react-library/auth/auth.jsx';
+import { AuthProvider } from '@/react-library/auth/context.jsx';
+import { Test } from './test/test.jsx';
+import { UpdateProfile } from '@/react-library/auth/UpdateProfile.jsx';
+import { Home } from '@/routes/Home.jsx';
+import { Entry } from '@/routes/layout.jsx';
+import { NavProvider } from './react-library/Nav/context.jsx';
+import { ThemeProvider } from '@/react-library/Theme/Theme.jsx';
 
-import { ManageUsers } from './auth/ManageUsers.jsx';
-import { AllScholarships } from "./project-folder/AllScholarships.jsx"
-import { ScholarshipDetail } from './project-folder/ScholarshipDetail.jsx';
-import { Dashboard } from './project-folder/Dashboard.jsx';
-import { SuccesfulPayment, FailedPayment } from './project-folder/payment/payment.jsx'
+import { ManageUsers } from '@/react-library/auth/ManageUsers.jsx';
+import { AllScholarships } from "@/routes/AllScholarships.jsx"
+import { ScholarshipDetail } from './routes/ScholarshipDetail.jsx';
+import { Dashboard } from '@/routes/Dashboard.jsx';
+import { SuccesfulPayment, FailedPayment } from '@/routes/payment/payment.jsx'
 
+import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient();
 
@@ -36,7 +34,7 @@ const App = () => {
         <BrowserRouter>
             <ThemeProvider>
             <AuthProvider>
-            <DownWindowProvider>
+            <NavProvider>
                     <ToastContainer />
                     <Routes>
                         <Route path='/' element={<Entry />} >
@@ -53,7 +51,7 @@ const App = () => {
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>
-            </DownWindowProvider>
+            </NavProvider>
             </AuthProvider>
             </ThemeProvider>
         </BrowserRouter>

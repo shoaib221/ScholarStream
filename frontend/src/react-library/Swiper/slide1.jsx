@@ -73,13 +73,15 @@ export function InfiniteSlider() {
                             onClick={() =>
                                 navigate(`/scholarship-detail/${elem._id}`)
                             }
-                            className="slide-item text-outline-123"
+                            className="flex flex-col-reverse rounded-lg"
                             style={{
                                 backgroundImage: `url(${elem.image})`, backgroundSize: "cover", height: "100%",
-                                backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: 'var(--color1)', textAlign: 'center'
+                                backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: 'var(--color1)'
                             }}
                         >
-                            {elem.scholarshipName}
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-lg" />
+                            <div className="text-white text-lg z-20 items-center text-center" > {elem.scholarshipName} </div> 
                         </div>
                     </SwiperSlide>
                 ))}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import '../Box/box.css';
+import './box.css';
 import { useNavigate } from 'react-router-dom';
 import { IoPerson } from "react-icons/io5";
 import { BiCategory } from "react-icons/bi";

@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { useAuthContext } from "../../auth/context";
+import { useAuthContext } from "../auth/context";
 import { FaRegSmile } from "react-icons/fa";
 import { GrUploadOption } from "react-icons/gr";
 import axios from "axios";

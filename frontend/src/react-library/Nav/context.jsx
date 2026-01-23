@@ -11,29 +11,48 @@ export const useNavContext = () => useContext(NavContext)
 export const NavProvider = ({ children }) => {
     const [down1, setDown1] = useState(true)
     const navigate = useNavigate()
-    const [ navi, selectNavi ] = useState("home")
+    const [navi, selectNavi] = useState("home")
     const location = useLocation()
 
-    function DownWindow( wind, path) {
+    const [screen, setSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
 
-        setDown1( wind )
-        if( path ) navigate(path)
+    useEffect(() => {
+        const handleResize = () => {
+            setSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        };
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    
+
+    function DownWindow(wind, path) {
+
+        setDown1(wind)
+        if (path) navigate(path)
 
     }
 
-    useEffect( () => {
+    useEffect(() => {
         //console.log("Location change")
         let path = location.pathname.toLowerCase();
-        if( path.includes("all-scholarships") ) selectNavi("all-scholarships");
-        else if( path.includes("dashboard") ) selectNavi("dashboard");
-        else if( path.includes("detail") ) selectNavi("details");
+        if (path.includes("all-scholarships")) selectNavi("all-scholarships");
+        else if (path.includes("dashboard")) selectNavi("dashboard");
+        else if (path.includes("detail")) selectNavi("details");
         else selectNavi("home");
-    }, [location?.pathname] )
+    }, [location?.pathname])
 
 
     function handleResize() {
-    
-        if( window.innerWidth > 768 ) {
+
+        if (window.innerWidth > 768) {
             setDown1(true)
         }
     }
@@ -43,29 +62,11 @@ export const NavProvider = ({ children }) => {
         return () => window.removeEventListener("resize", handleResize);
     }, [])
 
-    const DownWindowTag = () => {
-        
-        return (
-            
-            <div className={`${down1 ? "hidden" : "flex" } absolute z-2 h-[100%] w-[100%] bg-[var(--color1)]  flex-col items-center top-0 left-0 p-4 gap-4`}  >
-                <div onClick={() => DownWindow( true, "/")} className={ `class-1 ${navi === "home" && "active-navi" }` }  >Home</div>
-                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-scholarships" && "active-navi" }` } >Scholarships</div>                
-            </div>
-        )
-    }
 
-    const LargeScreenTag = () => {
-        return (
-            <div className='hidden lg:flex text-[0.9rem]' >
-                <div onClick={() => DownWindow( true, "/")} className={ `class-1 ${navi === "home" && "active-navi" }` }  >Home</div>
-                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-scholarships" && "active-navi" }` } >Scholarships</div>                
-            </div>
-        )
-    }
 
 
     return (
-        <NavContext.Provider value={{ LargeScreenTag, down1, setDown1, DownWindow, DownWindowTag, navi }} >
+        <NavContext.Provider value={{ down1, setDown1, DownWindow, navi, screen }} >
             {children}
         </NavContext.Provider>
     )

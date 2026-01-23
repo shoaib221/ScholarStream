@@ -40,11 +40,11 @@ export const FAQs = () => {
             { qas && qas.map( (elem, index) => (
                 <div key={index} onClick={ () => ToggleFunction(index) }  >
                     <div className="flex justify-between gap-4 cursor-pointer" >  
-                        <span className="text-justify" > {elem.question} </span>
+                        <span className="header-11" > {elem.question} </span>
                         <button > { index === ques ? "-": "+" } </button>
                     </div>
                     { ques === index && 
-                        <div className="px-2 text-[var(--color3)] text-justify" > {elem.answer} </div>
+                        <div className="px-2 text-(--color2)" > {elem.answer} </div>
                      }
                 </div>
             ) ) }

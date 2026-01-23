@@ -72,7 +72,7 @@ export const Divisions = () => {
 }
 
 
-export const SearchDivisions = () => {
+export const SearchCountries = () => {
 
     const mapRef = useRef(null);
 
@@ -88,14 +88,16 @@ export const SearchDivisions = () => {
 
 
     return (
-        <div className='flex flex-col w-full p-4 relative' >
+        <div className='flex flex-col w-full px-4 relative' >
+
+            <div className='header-12' >Locate Available Destinations </div>
 
             <input
-                className='bg-(--color4) text-(--color1) absolute top-6 right-6 z-10 rounded-lg w-[50vw]' style={{ width: '50vw' }}
+                className='bg-(--color4) text-(--color1) absolute top-16 left-24 z-10 rounded-lg' style={{ width: '15rem' }}
                 placeholder='Search by country' onChange={(e) => Search(e.target.value)} />
 
             <div className='border-2 rounded-lg border-(--color4)' >
-                <MapContainer ref={mapRef} center={[20, 0]} zoom={2.5} scrollWheelZoom={false} className='h-100 lg:h-150 z-0 w-full' >
+                <MapContainer ref={mapRef} center={[0, 0]} zoom={2} scrollWheelZoom={false} className='h-100 z-0 w-full' >
 
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
