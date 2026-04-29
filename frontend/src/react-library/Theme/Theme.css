@@ -17,7 +17,7 @@
 
 
 [color-theme="light"] {
-	--color1: white;
+	--color1: rgb(255, 255, 255);
 	--color1a: #b8b8b8;
 	--color2: black;
 	--color2a: rgb(0,0,0, .7);

@@ -9,7 +9,6 @@ import { ReactHookFormExample } from '@/react-library/react-hook-form/react-hook
 import { SwiperDemo }  from '@/react-library/Swiper/swiper.jsx';
 import { ScrollToTop } from '@/react-library/miscel/Scroll.jsx';
 import { Footer } from '@/react-library/Nav/Footer.jsx'
-import '@/react-library/style/export.css'
 
 
 export const Entry = () => {

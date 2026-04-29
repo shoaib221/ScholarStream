@@ -3,6 +3,22 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 
+
+import L from "leaflet";
+
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
+
+
 const countries = [
     { country: "United States", latitude: 39.8283, longitude: -98.5795 },
     { country: "Canada", latitude: 56.1304, longitude: -106.3468 },

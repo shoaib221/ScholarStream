@@ -4,7 +4,7 @@ const Story = ({ story }) => {
 
     return (
         <div className='flex flex-col justify-between px-2 min-w-80 
-                        bg-(--color4) hover:bg-(--color4)/80 text-white p-2'  >
+                        bg-(--color4) hover:bg-(--color4)/80 text-(--color1) p-2'  >
 
             <div className="flex-1 text-justify" >
                 {story.comment}

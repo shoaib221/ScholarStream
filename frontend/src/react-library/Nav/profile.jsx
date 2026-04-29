@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../auth/context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSignOut } from "../auth/auth";
+import { useThemeContext } from "../Theme/Theme";
+
 
 export const ProfileLogo1 = ({ image = "/avatar.jpg", }) => {
 
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
     const { user } = useAuthContext();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { sign_out } = useSignOut();
+    const { toggleTheme } = useThemeContext();
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -39,28 +44,21 @@ export const ProfileLogo1 = ({ image = "/avatar.jpg", }) => {
 
             {/* Dropdown */}
             {open && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-50">
-                    <ul className="py-1 text-sm text-gray-700">
+                <div className="absolute right-0  w-48 bg-(--color4) rounded-lg shadow-lg border z-50">
+                    <ul className="py-1 text-sm text-(--color1)">
                         <li>
-                            <a
-                                href="/profile"
-                                className="block px-4 py-2 hover:bg-gray-100"
+                            <Link
+                                to="/profile"
+                                className="block px-4 py-2 hover:opacity-80 cursor-pointer"
                             >
                                 Profile
-                            </a>
+                            </Link>
                         </li>
-                        <li>
-                            <a
-                                href="/settings"
-                                className="block px-4 py-2 hover:bg-gray-100"
-                            >
-                                Settings
-                            </a>
-                        </li>
+                        
                         <li>
                             <button
-                                className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                                onClick={() => alert("Theme switch")}
+                                className="w-full text-left px-4 py-2 hover:opacity-80 cursor-pointer"
+                                onClick={() => toggleTheme() }
                             >
                                 Theme
                             </button>
@@ -69,8 +67,8 @@ export const ProfileLogo1 = ({ image = "/avatar.jpg", }) => {
                             <hr className="my-1" />
                         </li>
                         <li>
-                            <button
-                                className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                            <button onClick={() => sign_out() }
+                                className="w-full text-left px-4 py-2 text-red-600 hover:opacity-80 cursor-pointer"
                             >
                                 Logout
                             </button>

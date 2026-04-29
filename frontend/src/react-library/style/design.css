@@ -1,0 +1,17 @@
+/* width */
+*{
+  
+  scrollbar-width: thin;
+  
+}
+
+
+
+.box-1234 {
+	background-color: black;
+	color: red;
+	border: 5px solid green;
+	padding: .5rem;
+}
+
+

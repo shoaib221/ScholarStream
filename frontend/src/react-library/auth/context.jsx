@@ -9,7 +9,7 @@ export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
 // const baseURL = "http://localhost:4000";
-const baseURL = "https://express-practice-chi.vercel.app/";
+const baseURL = "https://express-practice-xbf9.onrender.com";
 
 
 const axiosInstance = axios.create({

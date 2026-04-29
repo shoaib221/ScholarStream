@@ -17,6 +17,24 @@ import { ForbiddenAccess } from './RestrictedRoutes.jsx';
 const isValidemail = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
 
 
+export const useSignOut = () => {
+    const { setUser, user } = useAuthContext() ;
+    const navigate = useNavigate()
+
+
+    function handle() {
+        signOut(auth).then(() => {
+            setUser(null);
+            navigate('/')
+        }).catch((error) => {
+            console.error(error.message)
+        });
+    }
+
+    return { sign_out: handle }
+}
+
+
 export const SignOut = () => {
     const { setUser, user } = useAuthContext() ;
     const navigate = useNavigate()
@@ -45,7 +63,7 @@ const LogIn = ({ toggle }) => {
 
 
     return (
-        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-white/80' >
+        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-(--color1)/80' >
             <EmailLogin />
 
             <Breaker message={'or'} />
@@ -71,7 +89,7 @@ const LogIn = ({ toggle }) => {
 const Register = ({ toggle }) => {
 
     return (
-        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-white/80' >
+        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-(--color1)/80' >
             <EmailRegister />
 
             <Breaker message={'or'} />
@@ -113,7 +131,7 @@ const ForgotPassword = ({ toggle }) => {
     }
 
     return (
-        <div className='box-1 flex flex-col justify-center items-center gap-4 w-full max-w-[500px] bg-white/80' >
+        <div className='box-1 flex flex-col justify-center items-center gap-4 w-full max-w-[500px] bg-(--color1)/80' >
             <div className='text-3xl text-center font-bold text-(--color4)' > Reset Password </div>
             <input type='email' placeholder='Type Your Email' value={email}
                 onChange={(e) => setEmail(e.target.value)} className='w-full' />

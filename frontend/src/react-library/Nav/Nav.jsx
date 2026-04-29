@@ -37,9 +37,9 @@ const ScrollToTop = () => {
 
 
 export const Nav = () => {
-    const { ThemeChoice } = useThemeContext()
+    const { ThemeChoice } = useThemeContext();
     const { down1, DownWindow, navi, LargeScreenTag } = useNavContext();
-    const [opener1, setOpener1] = useState(false)
+    const [opener1, setOpener1] = useState(false);
 
     function Opener1() {
         setOpener1(prev => !prev)
@@ -80,6 +80,8 @@ export const Nav = () => {
 
 
             <ProfileLogo1 />
+
+            
 
             <ScrollToTop />
         </nav>

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useAuthContext } from '../auth/context';
 import { toast } from 'react-toastify';
-import '../style/export.css'
 
 
 export const GetInTouch = () => {
