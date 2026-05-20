@@ -37,7 +37,7 @@ A full-stack  web app for hunting scholarships around the world.
 
 **Deployment:**
 - Frontend: Netlify  
-- Backend: Vercel  
+- Backend: Render  
 
 ---
 
