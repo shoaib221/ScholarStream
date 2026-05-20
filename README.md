@@ -36,8 +36,8 @@ A full-stack  web app for hunting scholarships around the world.
 - Firebase Auth  
 
 **Deployment:**
-- Frontend: Netlify  
-- Backend: Render  
+- Frontend - [Netlify](https://scholarstream-shoaib221.netlify.app/)
+- Backend - [Render](https://express-practice-xbf9.onrender.com)
 
 ---
 
