@@ -35,9 +35,6 @@ A full-stack  web app for hunting scholarships around the world.
 **Authentication:**
 - Firebase Auth  
 
-**Deployment:**
-- Frontend - [Netlify](https://scholarstream-shoaib221.netlify.app/)
-- Backend - [Render](https://express-practice-xbf9.onrender.com)
 
 ---
 
@@ -53,7 +50,6 @@ A full-stack  web app for hunting scholarships around the world.
 
 git clone https://github.com/shoaib221/ScholarStream.git
 cd backend
-cd frontend
 npm install
 npm run dev
 
