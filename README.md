@@ -38,10 +38,6 @@ A full-stack  web app for hunting scholarships around the world.
 
 ---
 
-## 📦 Packages Used
-- swiper
-- react-toastify
-- framer motion
 
 
 ## 🧑‍💻 Setup Instructions
