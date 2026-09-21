@@ -48,5 +48,11 @@ git clone https://github.com/shoaib221/ScholarStream.git
 cd backend
 npm install
 npm run dev
+ ```
 
+### Target Problems
+- Learning ExpressJS & ReactJS
+- CRUD operation
+- Authentication & Protected Routes
+- Theme
 
