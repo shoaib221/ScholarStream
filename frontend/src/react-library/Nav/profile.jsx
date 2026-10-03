@@ -26,7 +26,7 @@ export const ProfileLogo1 = ({ image = "/avatar.jpg", }) => {
     }, []);
 
 
-    if(!user) return <button className="button-3" onClick={ () => navigate('/auth') } >Login</button>
+    if(!user) return <button className="button-4" onClick={ () => navigate('/auth') } >Login</button>
 
     return (
         <div className="relative" ref={dropdownRef}>
@@ -36,7 +36,7 @@ export const ProfileLogo1 = ({ image = "/avatar.jpg", }) => {
                 className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200 focus:outline-none"
             >
                 <img
-                    src={user?.photo}
+                    src={user?.photoURL}
                     alt="Profile"
                     className="w-full h-full object-cover"
                 />

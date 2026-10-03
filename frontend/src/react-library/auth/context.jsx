@@ -8,8 +8,9 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
-// const baseURL = "http://localhost:4000";
-const baseURL = "https://express-practice-xbf9.onrender.com";
+const baseURL = "http://localhost:4000/api";
+
+// const baseURL = "/api";
 
 
 const axiosInstance = axios.create({

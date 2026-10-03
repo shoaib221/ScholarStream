@@ -1,43 +1,36 @@
-import dotenv from "dotenv";
-dotenv.config();
 
-import express from "express";
-import cors from "cors";
-import http from "http";
+import { server } from "./starter.js";
 import { Server } from "socket.io";
-import multer from "multer";
+import { YSocketIO } from "y-socket.io/dist/server";
+import { User } from "../auth/model.js";
+import admin from "firebase-admin";
+
+
+export const onlineUserMap = {};
+export const my_username = "";
+
+function run() {
+
+	try {
+		// console.log(process.env.FIREBASE_KEY, '\n');
+		let key = Buffer.from(process.env.FIREBASE_KEY, "base64").toString("utf8");
+		// console.log(key, '\n');
+		let key1 = JSON.parse(key);
+		// console.log( key1, '\n' )
+
+		admin.initializeApp({
+			credential: admin.credential.cert(key1)
+		});
+	} catch (err) {
+		console.dir(err)
+	}
+}
+
+run();
+
+export { admin }
 
 
 
-export const app = express();
-app.use(cors());
-app.use(express.json());
-app.use( express.static('uploads') );
 
-export const server = http.createServer(app);
-export const io = new Server( server, {
-	cors: "http://localhost:3000"
-} );
-
-
-export const onlineUserMap = {  };
-export const my_username="" ;
-
-export const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'uploads/'); },
-	filename: function (req, file, cb) {
-		cb(null, 'profile-photo' + '-' + req.username+'.jpg'); }
-});
-
-export const multer_upload = multer({ storage: storage });
-
-export const message_photo_upload = multer({ storage: multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'uploads/messages/'); },
-	filename: function (req, file, cb) {
-		cb(null,  Date.now()+'-'+file.originalname ); }
-
-
-})  })
 

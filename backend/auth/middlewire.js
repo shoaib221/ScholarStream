@@ -1,5 +1,5 @@
 
-import { admin } from "./firebase_config.js";
+import { admin } from '../utils/socket.js';
 
 
 
@@ -16,12 +16,14 @@ export const requireAuth = async (req, res, next) => {
         const userInfo = await admin.auth().verifyIdToken(token);
         if (!userInfo) throw Error('invalid token');
         // console.log(userInfo)
-        // const ret = await User.findOne({ username: userInfo.email });
+        const ret = await User.findOne({ username: userInfo.email });
         
-        // if (!ret) throw Error("No such user. Please sign up!");
+        if (!ret) throw Error("No such user. Please sign up!");
         //console.log( ret )
-        req.user_email = userInfo.email;
-        req.name = userInfo.name;
+        req.user_email = ret.username;
+        req.username = ret.username;
+        req.name = ret.name;
+        req.user_id = ret._id;
         //console.dir(user);
         next();
     } catch (err) {
@@ -85,6 +87,12 @@ export const requireModerator = async (req, res, next) => {
         res.status(400).json( { error: err.message } );
     }
 }
+
+
+
+
+
+
 
 
 

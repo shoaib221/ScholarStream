@@ -8,8 +8,17 @@ import jwt from "jsonwebtoken";
 import { requireAdmin, requireAuth, requireAuthJWT } from "./middlewire.js";
 import { oauth2Client } from "../utils/googleClient.js";
 import axios from "axios";
-import { multer_upload } from "../utils/socket.js";
-import { error } from "console";
+import nodemailer from "nodemailer";
+import { v2 as cloudinary } from "cloudinary";
+
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+
 
 export const authRouter = express.Router();
 
@@ -117,7 +126,7 @@ const Profile = async (req, res, next) => {
 
     try {
         const response = await User.findOne({ username: req.username })
-        res.status(200).json(response)
+        res.status(200).json({ profile: response });
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -126,21 +135,28 @@ const Profile = async (req, res, next) => {
 const UpdateProfile = async (req, res, next) => {
     console.log('update profile');
     try {
-        console.log(req.body);
-        console.log(req.file);
+        //console.log(req.body);
 
-        await User.updateOne({ username: req.username }, {
-            $set: {
-                name: req.body.name,
-                description: req.body.description
+        let user = await User.findOne({ username: req.user_email })
+
+        console.log(req.body)
+
+        user = await User.findByIdAndUpdate(
+            user._id,
+            {
+                $set: { ...req.body }
+            },
+            {
+                new: true
             }
-        })
+        )
 
-        const saved_user = await User.findOne({ username: req.username })
+        console.log(user)
 
-        res.status(200).json(saved_user)
+        res.status(200).json({ user })
 
     } catch (err) {
+        console.log(err.message)
         res.status(400).json({ error: 'aha' })
     }
 }
@@ -154,24 +170,14 @@ const FirebaseRegister = async (req, res, next) => {
         let real_user = await User.findOne({ username: user.email });
 
         if (!real_user) {
-            real_user = User({
+            real_user = await User.insertOne({
                 username: user.email,
                 password: hashedpassword,
                 name: user.displayName,
                 photo: user.photoURL
             })
         }
-        else {
-            real_user.name = user.displayName;
-            real_user.photo = user.photoURL;
-        }
 
-
-        await real_user.save();
-
-
-
-        //console.dir(real_user)
         res.status(200).json({ user: real_user })
 
     } catch (err) {
@@ -197,9 +203,16 @@ const VisitCount = async (req, res, next) => {
 }
 
 const FetchUsers = async (req, res, next) => {
-    console.log("fetch users")
+
+    const { filter } = req.query
+    console.log("fetch users", filter)
     try {
-        let users = await User.find({});
+        let users = null;
+        if (filter) {
+            users = await User.find({ role: filter })
+        }
+        else
+            users = await User.find({});
         res.status(200).json({ users });
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -236,6 +249,106 @@ const DeleteUser = async (req, res) => {
     }
 };
 
+
+export const SendMessage = async (req, res, next) => {
+
+    try {
+
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_APP_PASS,
+            },
+        });
+
+        const { email, message, phone, name } = req.body;
+
+        const info = await transporter.sendMail({
+            from: `"My App" <${process.env.EMAIL_USER}>`,
+            to: "shoaibtasrif326@gmail.com" ,
+            subject: "Get in touch" ,
+            text: message,
+            html: `
+                <p> ${ message } </p>
+                <div> Best Regards, </div>
+                <div> ${ name } </div>
+                <div> ${ phone } </div>
+                <div> ${ email } </div>
+            `
+        });
+
+        await transporter.sendMail({
+            from: `"My App" <${process.env.EMAIL_USER}>`,
+            to: email ,
+            subject: "Let us connect" ,
+            text: message,
+            html: `
+                <div> Dear ${ name }, </div>
+                <p> Thanks for your knock. We will reply to your question very soon.</p>
+                <div> Best Regards, </div>
+                <div> ScholarStream </div>
+                
+            `
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Email sent successfully",
+            messageId: info.messageId,
+        });
+
+    } catch (err) {
+        console.log( err.message )
+        res.status(400).json({
+            error: err.message
+        })
+    }
+}
+
+
+
+
+
+
+
+export const CloudinarySign = async (req, res, next) => {
+
+    try {
+        
+
+        const timestamp = Math.floor(Date.now() / 1000);
+
+        // You can customize upload params here
+        const params = {
+            timestamp,
+            folder: "nextjs_uploads",
+        };
+
+        const signature = cloudinary.utils.api_sign_request(
+            params,
+            process.env.CLOUDINARY_API_SECRET
+        );
+
+        
+        res.status(200).json({
+            timestamp,
+            signature,
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+            folder: "nextjs_uploads",
+        });
+
+    } catch (error) {
+        console.log( err.message )
+        res.status(400).json({
+            error: err.message
+        })
+    }
+
+}
+
+
 // ################################## routes    ############################
 
 
@@ -247,7 +360,10 @@ authRouter.post("/fb-register", requireAuth, FirebaseRegister);
 authRouter.get("/users", requireAuth, requireAdmin, FetchUsers);
 authRouter.post("/change-role", requireAuth, requireAdmin, ChangeRole)
 authRouter.delete("/user/:id", requireAuth, requireAdmin, DeleteUser)
-
+authRouter.get("/profile", requireAuth, Profile);
+authRouter.post("/profile", requireAuth, UpdateProfile)
+authRouter.post("/send-message", SendMessage)
+authRouter.get( "/cloudinary-sign", CloudinarySign )
 
 
 // authRouter.get( "/init", requireAuthJWT, Init );

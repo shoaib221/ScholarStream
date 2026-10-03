@@ -38,38 +38,32 @@ export const Home = () => {
         <div className='block flex-grow relative flex-1 w-full' >
             
             <Banner12 />
-            <br /><br />
+            <br /><br /><br/>
             <div className='header-12' > Top Scholarships </div>
             <InfiniteSlider />
-            <br /><br />
+            <br /><br /><br/>
             <div className='header-12' >Frequently Asked Questions</div>
             <br />
             <FAQs />
 
-            <br /><br />
+            <br /><br /><br/> <br/>
             <div className='header-12' >Success Stories</div>
             <br/>
             <ScrollProduct />
 
-            <br/><br/>
+            <br/><br/><br/><br/>
 
             
 
-            <div >
-
-            </div>
-
-            <div className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr]' >
+            <div className='grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] gap-8' >
                 <SearchCountries />
                 <GetInTouch />
             </div>
             
 
-
+            <br /><br /><br/>
             
-            <div className='' >
-
-            </div>
+           
             
         </div>
     );

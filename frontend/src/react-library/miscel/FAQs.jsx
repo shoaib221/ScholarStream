@@ -38,13 +38,14 @@ export const FAQs = () => {
     return (
         <div className="w-full max-w-[800px] mx-auto flex flex-col gap-4" >
             { qas && qas.map( (elem, index) => (
-                <div key={index} onClick={ () => ToggleFunction(index) }  >
+                <div key={index} onClick={ () => ToggleFunction(index) } className="box-5" >
                     <div className="flex justify-between gap-4 cursor-pointer" >  
                         <span className="header-11" > {elem.question} </span>
                         <button > { index === ques ? "-": "+" } </button>
                     </div>
+                    
                     { ques === index && 
-                        <div className="px-2 text-(--color2)" > {elem.answer} </div>
+                        <div className="px-2 text-(--color2) mt-2" >  {elem.answer} </div>
                      }
                 </div>
             ) ) }

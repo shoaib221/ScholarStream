@@ -12,7 +12,7 @@ import { ProfileLogo1 } from './profile.jsx';
 
 export const Logo = () => {
     return (
-        <div className='h-[3rem] text-[var(--color4)] flex gap-2' >
+        <div className='h-[3rem] text-(--color4) flex gap-2' >
             <FaGraduationCap className='h-full text-2xl' />
             <div className='cen-ver font-black' >ScholarStream</div>
         </div>
@@ -40,6 +40,7 @@ export const Nav = () => {
     const { ThemeChoice } = useThemeContext();
     const { down1, DownWindow, navi, LargeScreenTag } = useNavContext();
     const [opener1, setOpener1] = useState(false);
+    const { user } = useAuthContext();
 
     function Opener1() {
         setOpener1(prev => !prev)
@@ -68,14 +69,14 @@ export const Nav = () => {
             <div className={`${down1 ? "hidden" : "flex"} fixed z-30  bg-[var(--color1)]  flex-col items-center top-14 left-0 right-0 bottom-0 p-4 gap-4`}  >
                 <div onClick={() => DownWindow(true, "/")} className={`class-1 ${navi === "home" && "active-navi"}`}  >Home</div>
                 <div onClick={() => DownWindow(true, "/all-scholarships")} className={`class-1 ${navi === "all-scholarships" && "active-navi"}`} >Scholarships</div>
-                <div onClick={() => DownWindow(true, "/dashboard")} className={`class-1 ${navi === "dashboard" && "active-navi"}`} >Dashboard</div>
+                { user && <div onClick={() => DownWindow(true, "/dashboard")} className={`class-1 ${navi === "dashboard" && "active-navi"}`} >Dashboard</div>}
             </div>
 
 
             <div className='hidden lg:flex text-[0.9rem]' >
                 <div onClick={() => DownWindow(true, "/")} className={`class-1 ${navi === "home" && "active-navi"}`}  >Home</div>
                 <div onClick={() => DownWindow(true, "/all-scholarships")} className={`class-1 ${navi === "all-scholarships" && "active-navi"}`} >Scholarships</div>
-                <div onClick={() => DownWindow(true, "/dashboard")} className={`class-1 ${navi === "dashboard" && "active-navi"}`} >Dashboard</div>
+                { user && <div onClick={() => DownWindow(true, "/dashboard")} className={`class-1 ${navi === "dashboard" && "active-navi"}`} >Dashboard</div>}
             </div>
 
 
@@ -92,6 +93,7 @@ export const Nav = () => {
 
 import { IoArrowUpSharp, IoMailSharp } from "react-icons/io5";
 import { FaGlobe } from "react-icons/fa";
+import { useAuthContext } from '../auth/context';
 
 
 export const Footer = () => {

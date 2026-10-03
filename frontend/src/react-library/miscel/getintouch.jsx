@@ -31,7 +31,8 @@ export const GetInTouch = () => {
                 <textarea  value={info.message} onChange={ (e) => setInfo( { ...info, message: e.target.value } ) }
                     className="col-span-2 input-11" rows={5} placeholder="Your Message" />
 
-                <button className="col-span-2 button-3 mx-auto" onClick={SendMessage} >
+                
+                <button className="col-span-2 button-5 mx-auto mt-4" onClick={SendMessage} >
                     Send
                 </button>
             </div>

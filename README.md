@@ -35,16 +35,9 @@ A full-stack  web app for hunting scholarships around the world.
 **Authentication:**
 - Firebase Auth  
 
-**Deployment:**
-- Frontend: Netlify  
-- Backend: Vercel  
 
 ---
 
-## 📦 Packages Used
-- swiper
-- react-toastify
-- framer motion
 
 
 ## 🧑‍💻 Setup Instructions
@@ -53,8 +46,13 @@ A full-stack  web app for hunting scholarships around the world.
 
 git clone https://github.com/shoaib221/ScholarStream.git
 cd backend
-cd frontend
 npm install
 npm run dev
+ ```
 
+### Target Problems
+- Learning ExpressJS & ReactJS
+- CRUD operation
+- Authentication & Protected Routes
+- Theme
 
