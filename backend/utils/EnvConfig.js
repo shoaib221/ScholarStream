@@ -32,5 +32,7 @@ const envConfig = {
 
 };
 
+console.log("Loaded environment variables:", envConfig);
+
 export default envConfig;
 

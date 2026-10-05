@@ -1,17 +1,16 @@
 
 
 import express from "express";
-
 import Stripe from "stripe";
-import envConfig from "../utils/EnvConfig.js";
-const stripe = new Stripe(envConfig.stripeKey);
-
-
-import { requireAuth } from "../auth/middlewire.js";
-import { Parcel } from "./model.js";
 import { ObjectId } from "mongodb";
 import crypto from "crypto";
+import envConfig from "../utils/EnvConfig.js";
+import { requireAuth } from "../auth/middlewire.js";
+import { Parcel } from "./model.js";
 
+
+
+const stripe = new Stripe(envConfig.stripeKey);
 
 function generateTrackingId() {
     const date = new Date();
