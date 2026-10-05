@@ -2,27 +2,24 @@ import express, { application } from "express"
 import { Scholarship, Application, Review } from "./model.js"
 import { requireAdmin, requireAuth, requireModerator } from "../auth/middlewire.js";
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_KEY);
-const YOUR_DOMAIN = 'http://localhost:5173'; // put in env
 import crypto from "crypto";
 import { User } from "../auth/model.js";
 import { match } from "assert";
 import { Types } from "mongoose";
 import { count } from "console";
 import { FeesDistribution, fetchScholarships, ApplicationAnalytics, UserAnalytics, ScholarshipAnalytics } from "./method.js"
+import envConfig from "../utils/EnvConfig.js";
 
 
-export const scholarshipRouter = express.Router();
-
-
+const stripe = new Stripe(envConfig.stripeKey);
 
 
 const AddScholarship = async (req, res, next) => {
     try {
         console.log(req.body);
         let scholarship = { ...req.body }
-        
-        scholarship.deadline = new Date( req.body.deadline ) // dd/mm/yyyy
+
+        scholarship.deadline = new Date(req.body.deadline) // dd/mm/yyyy
         scholarship.postedBy = req.user_email;
         scholarship.postedAt = new Date();
         scholarship = Scholarship(scholarship);
@@ -63,13 +60,13 @@ const UpdateScholarship = async (req, res, next) => {
 }
 
 const FetchScholarships = async (req, res, next) => {
-    
+
     //console.log(sort, order, count);
 
     try {
         let val = await fetchScholarships(req.query)
         // console.log(scholarships);
-        console.log(val)
+        // console.log(val)
 
         res.status(200).json(val);
     } catch (err) {
@@ -128,7 +125,7 @@ const Apply = async (req, res, next) => {
         }
 
         if (application.paymentStatus === 'paid') {
-            return res.status(200).json({ url: `${YOUR_DOMAIN}/payment_success` });
+            return res.status(200).json({ url: `${envConfig.frontendUrl}/payment_success` });
         }
 
         let pipeline = [
@@ -177,8 +174,8 @@ const Apply = async (req, res, next) => {
                 paymentAmount: application.paymentAmount
             },
             mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/payment_success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${YOUR_DOMAIN}/payment_failed?session_id={CHECKOUT_SESSION_ID}`
+            success_url: `${envConfig.frontendUrl}/payment_success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${envConfig.frontendUrl}/payment_failed?session_id={CHECKOUT_SESSION_ID}`
         });
 
         res.status(200).json({ url: session.url, application });
@@ -354,7 +351,7 @@ const FetchReviews = async (req, res, next) => {
         console.log(req.query.scholarshipName)
         let pipeline = []
 
-        
+
 
         pipeline.push(
 
@@ -370,12 +367,12 @@ const FetchReviews = async (req, res, next) => {
             { $sort: { date: -1 } }
         );
 
-        if(scholarshipName) pipeline.push(
-            { $match: { "scholarshipDetails.scholarshipName" : scholarshipName } },
+        if (scholarshipName) pipeline.push(
+            { $match: { "scholarshipDetails.scholarshipName": scholarshipName } },
             { $limit: 5 }
         )
 
-        
+
 
         let reviews = await Review.aggregate(pipeline);
         res.status(200).json({ reviews });
@@ -531,18 +528,18 @@ const UpdateApplication = async (req, res, next) => {
 
 const Analytics = async (rq, res, next) => {
     try {
-        
+
 
         let scholarshipdata = await ScholarshipAnalytics()
 
-        const appdata = await ApplicationAnalytics(  );
+        const appdata = await ApplicationAnalytics();
 
         let userdata = await UserAnalytics();
 
-        let  feesData  = await FeesDistribution()
-        
-        
-        
+        let feesData = await FeesDistribution()
+
+
+
         res.status(200).json({
             ...userdata,
             ...scholarshipdata, ...feesData,
@@ -555,7 +552,7 @@ const Analytics = async (rq, res, next) => {
     }
 }
 
-
+export const scholarshipRouter = express.Router();
 
 scholarshipRouter.get("/analytics", requireAuth, requireAdmin, Analytics);
 scholarshipRouter.post("/add", requireAuth, requireAdmin, AddScholarship);

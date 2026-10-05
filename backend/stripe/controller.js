@@ -42,6 +42,8 @@ const Checkout = async (req, res, next) => {
 
         const paymentInfo = req.body;
 
+        console.log("Checkout", envConfig);
+
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
