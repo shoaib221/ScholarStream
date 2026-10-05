@@ -1,12 +1,13 @@
 
 
 import express from "express";
-export const paymentRouter = express.Router();
+
 import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_KEY);
+import envConfig from "../utils/EnvConfig.js";
+const stripe = new Stripe(envConfig.stripeKey);
+
 
 import { requireAuth } from "../auth/middlewire.js";
-const YOUR_DOMAIN = 'http://localhost:5173'; // put in env
 import { Parcel } from "./model.js";
 import { ObjectId } from "mongodb";
 import crypto from "crypto";
@@ -60,8 +61,8 @@ const Checkout = async (req, res, next) => {
                 parcelId: paymentInfo.parcelId
             },
             mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/payment_successful?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${YOUR_DOMAIN}/payment_canceled`
+            success_url: `${envConfig.frontendUrl}/payment_successful?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${envConfig.frontendUrl}/payment_canceled`
         });
 
         res.status(200).json({ url: session.url })
@@ -109,7 +110,7 @@ const PaymentSuccess = async (req, res, next) => {
     }
 }
 
-
+export const paymentRouter = express.Router();
 paymentRouter.post('/checkout-session', requireAuth, Checkout);
 paymentRouter.post("/success", requireAuth, PaymentSuccess);
 

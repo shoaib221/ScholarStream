@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
-const baseURL = "http://localhost:4000/api";
+// const baseURL = "http://localhost:4000/api";
 
-// const baseURL = "/api";
+const baseURL = "/api";
 
 
 const axiosInstance = axios.create({
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         );
     };
 
-    
+
     const handleUserLogin = async (firebaseUser) => {
         console.log("handle user login")
         if (!firebaseUser) {
