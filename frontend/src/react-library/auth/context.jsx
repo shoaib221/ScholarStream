@@ -8,9 +8,13 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
-// const baseURL = "http://localhost:4000/api";
+const isLocalhost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
 
-const baseURL = "/api";
+const baseURL = isLocalhost
+    ? "http://localhost:4000/api"
+    : "/api";
 
 
 const axiosInstance = axios.create({
