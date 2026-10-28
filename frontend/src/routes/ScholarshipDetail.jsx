@@ -71,16 +71,16 @@ export const ScholarshipDetail = () => {
         }
     }
 
-    
+
 
 
     return (
         <PrivateRoute>
-            { scholarship ?  <div className="mx-auto flex-grow w-full gap-4 flex flex-col lg:flex-row" >
+            {scholarship ? <div className="mx-auto flex-grow w-full gap-4 flex flex-col lg:flex-row" >
 
                 <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky lg:top-10 px-2" >
                     <div className='h-72 lg:h-90 w-full rounded-lg bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} ></div>
-                    <br/>
+                    <br />
                     <div className='text-xl text-(--color4) font-bold' > {scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>
                     <div> {scholarship.city} , {scholarship.country}</div>
                 </div>
@@ -93,31 +93,66 @@ export const ScholarshipDetail = () => {
                     </div>
                     <div className='font-bold' >{scholarship.degree} in {scholarship.subjectCategory}</div>
 
-                    
-                    <div className='text-(--color2)' > Deadline: <TimeDate date={scholarship?.deadline} /> </div>
+                    <br />
+
+                    {scholarship.description && <>
+                        <div className='font-bold text-xl' >Description</div>
+                        <div> {scholarship.description}  </div> <br />
+                    </>}
+
 
                     <br />
 
-                    <div className='text-xl text-(--color4) font-bold' > Expenses </div>
-                    <div> Application Fees: {scholarship.applicationFees} USD </div>
-                    <div> Service Charge: {scholarship.serviceCharge} USD </div>
-                    <div> Tuition Fees: {scholarship.tuitionFees} USD </div>
-                    <div> Net payable: {scholarship.applicationFees + scholarship.serviceCharge} USD </div>
+                    <div className='text-lg font-bold' > Info </div>
 
-                    <br />
+                    <div className='grid grid-cols-2 gap-2 py-2' >
+                        <div className='text-(--color2)' > Deadline </div>
+                        <TimeDate date={scholarship?.deadline} />
 
-                    {scholarship.description && <> <div className='font-bold text-xl' >Description</div>
+                        <div> Application Fees </div>
+                        <div> {scholarship.applicationFees} USD </div>
 
-                        <div> {scholarship.description}  </div> <br /> </>}
+                        <div> Service Charge </div>
+                        <div>  {scholarship.serviceCharge} USD </div>
+
+                        <div> Tuition Fees </div>
+                        <div> {scholarship.tuitionFees} USD </div>
+
+                        <div> Net payable </div>
+                        <div> {scholarship.applicationFees + scholarship.serviceCharge} USD </div>
+
+                    </div>
 
 
-                    <div className='font-bold text-xl' ></div>
 
-                    {/* <div>
-                        {scholarship.postedBy} at {scholarship.postedAt}
-                    </div> */}
 
-                    <br />
+
+                    <br /><br /><br />
+
+                    <div className='text-xl font-bold text-[var(--color4)]' >Top Reviews</div>
+
+                    {reviews && reviews.map((review) => (
+                        <div key={review._id} className='box-1212 p-4 mb-4 rounded-lg' >
+
+                            <div className='flex justify-between w-full' >
+                                <div className='mt-2' > {review.comment} </div>
+
+                                <div className='mt-2 flex gap-2' > {[...Array(review.rating)].map(elem => <span key={elem} className='text-orange-500' >★</span>)} </div>
+                            </div>
+
+                            <div className='text-(--color2a)' >{review.reviewerName} </div>
+
+                        </div>
+                    ))}
+
+
+
+
+
+
+
+
+                    <div className='h-24' ></div>
 
                     {user?.role === 'student' && <>
                         <div className="text-xl text-[var(--color4)] font-bold"  >Apply Now</div>
@@ -149,31 +184,23 @@ export const ScholarshipDetail = () => {
                         ></textarea>
 
                         <br />
-                        <button
+
+
+                        <button className='button-5'
                             onClick={Apply}
-                            className='button-91' >Submit</button>
+                        >Submit</button>
 
                     </>}
 
-                    <br /><br /><br />
 
-                    <div className='text-xl font-bold text-[var(--color4)]' >Top Reviews</div>
-
-                    {reviews && reviews.map((review) => (
-                        <div key={review._id} className='box-1212 p-4 mb-4 rounded-lg flex justify-between' >
-                            <div>
-                                <div className='mt-2 flex gap-2' > {[...Array(review.rating)].map(elem => <span key={elem} className='text-orange-500' >★</span>)} </div>
-                                <div className='mt-2' > {review.comment} </div>
-                                <div className='text-(--color2a)' > Reviewer: {review.reviewerName} </div>
-                            </div>
-                        </div>
-                    ))}
 
                 </div>
 
 
-            </div>:
-            <Loading /> }
+            </div> :
+                <Loading />}
+
+            <br/>
         </PrivateRoute>
     );
 };
